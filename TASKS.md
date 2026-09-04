@@ -36,6 +36,10 @@
       `[hidden]`-regel in de css
 - [x] Dubbele uitleg in het plakverslag ("Utrecht → provincie + plaats" twee keer)
 - [x] README met uitleg over starten, opnieuw importeren en de lijst aanpassen
+- [x] Online gezet op GitHub Pages: https://bankras.github.io/topo/
+      (bankras/topo, deploy vanaf `main`, `.nojekyll` erbij zodat Jekyll de
+      bestanden niet aanraakt). Live nagekeken: kaart, 56 punten en tien keer
+      goed aanwijzen.
 
 ## Nog te doen / te bespreken
 

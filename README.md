@@ -9,7 +9,15 @@ De punten komen uit de kaart die school gebruikt: **Basiskaart Nederland** op
 De provinciegrenzen komen van het CBS (via cartomap), omdat de vormen van
 topomania het IJsselmeer en de Waddenzee als land meerekenen.
 
-## Starten
+## Online
+
+Staat op GitHub Pages: **https://bankras.github.io/topo/**
+
+Elke push naar `main` zet de site opnieuw online; er is geen buildstap. De
+voortgang staat in de browser van de gebruiker (localStorage), dus die loopt per
+apparaat apart - op de laptop en op een tablet zijn het losse scores.
+
+## Zelf starten
 
 Dubbelklikken op `index.html` werkt, maar met een servertje is het betrouwbaarder:
 
