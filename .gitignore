@@ -1,0 +1,6 @@
+.DS_Store
+__pycache__/
+*.pyc
+
+# persoonlijke instellingen, niet delen
+.claude/settings.local.json

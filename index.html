@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Topo Nederland - oefenen</title>
+<link rel="stylesheet" href="css/stijl.css">
+</head>
+<body>
+
+<header class="balk">
+  <h1>Topo Nederland</h1>
+  <nav class="tabs" id="tabs">
+    <button class="tab" data-mode="leren">Leren</button>
+    <button class="tab" data-mode="aanwijzen">Aanwijzen</button>
+    <button class="tab" data-mode="benoemen">Benoemen</button>
+    <button class="tab" data-mode="toets">Toets</button>
+    <button class="tab" data-mode="lijst">Mijn lijst</button>
+  </nav>
+  <div class="balk-rechts">
+    <span id="lijst-teller" class="teller"></span>
+  </div>
+</header>
+
+<main>
+  <!-- Kaart + zijpaneel: gebruikt door leren / aanwijzen / benoemen / toets -->
+  <section id="scherm-kaart" class="kaart-layout">
+    <div class="kaart-vak">
+      <svg id="kaart" role="img" aria-label="Kaart van Nederland"></svg>
+      <div id="kaart-melding" class="kaart-melding" hidden></div>
+    </div>
+
+    <aside class="paneel">
+      <!-- Leren -->
+      <div class="paneel-blok" data-voor="leren">
+        <h2>Leren</h2>
+        <p class="uitleg">Klik op een naam om te zien waar het ligt. Of klik op de kaart.</p>
+        <label class="schakel">
+          <input type="checkbox" id="toon-namen" checked>
+          Namen op de kaart
+        </label>
+        <div class="zoek">
+          <input type="search" id="zoek" placeholder="Zoeken..." autocomplete="off">
+        </div>
+        <div id="leerlijst" class="leerlijst"></div>
+      </div>
+
+      <!-- Aanwijzen / Toets -->
+      <div class="paneel-blok" data-voor="aanwijzen toets">
+        <h2 id="oefen-titel">Aanwijzen</h2>
+        <p class="uitleg" id="oefen-uitleg">Waar ligt dit? Klik op de kaart.</p>
+        <div class="opdracht">
+          <span class="opdracht-cat" id="opdracht-cat"></span>
+          <strong class="opdracht-naam" id="opdracht-naam">-</strong>
+        </div>
+        <div id="oefen-feedback" class="feedback" aria-live="polite"></div>
+        <div class="knoppen">
+          <button id="btn-verder" class="knop primair" hidden>Volgende</button>
+          <button id="btn-weetniet" class="knop">Weet ik niet</button>
+        </div>
+        <div class="score-blok">
+          <div class="score-regel">
+            <span>Goed</span><strong id="score-goed">0</strong>
+          </div>
+          <div class="score-regel">
+            <span>Fout</span><strong id="score-fout">0</strong>
+          </div>
+          <div class="score-regel" id="toets-voortgang-regel" hidden>
+            <span>Vraag</span><strong id="toets-voortgang">0 / 0</strong>
+          </div>
+        </div>
+        <button id="btn-herstart" class="knop klein">Opnieuw beginnen</button>
+      </div>
+
+      <!-- Benoemen -->
+      <div class="paneel-blok" data-voor="benoemen">
+        <h2>Benoemen</h2>
+        <p class="uitleg">Welke plek is gemarkeerd op de kaart?</p>
+        <div id="keuzes" class="keuzes"></div>
+        <div id="benoem-feedback" class="feedback" aria-live="polite"></div>
+        <div class="knoppen">
+          <button id="btn-verder-benoem" class="knop primair" hidden>Volgende</button>
+        </div>
+        <div class="score-blok">
+          <div class="score-regel"><span>Goed</span><strong id="bscore-goed">0</strong></div>
+          <div class="score-regel"><span>Fout</span><strong id="bscore-fout">0</strong></div>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Mijn lijst -->
+  <section id="scherm-lijst" class="lijst-layout" hidden>
+    <div class="lijst-kop">
+      <h2>Mijn lijst</h2>
+      <p class="uitleg">
+        Vink aan wat er op de toets komt. Alleen aangevinkte punten worden
+        overhoord. Je keuze wordt bewaard in deze browser.
+      </p>
+      <div class="knoppen">
+        <button class="knop klein primair" id="btn-schoollijst">Lijst van school</button>
+        <button class="knop klein" id="btn-alles">Alles aanvinken</button>
+        <button class="knop klein" id="btn-niets">Alles uitvinken</button>
+        <button class="knop klein" id="btn-plakken">Lijst plakken...</button>
+        <button class="knop klein gevaar" id="btn-wis-voortgang">Voortgang wissen</button>
+      </div>
+      <div id="plak-vak" class="plak-vak" hidden>
+        <p class="uitleg">
+          Plak hier de namen van school (één per regel, of gescheiden door
+          komma's). Wat overeenkomt wordt aangevinkt, de rest uitgevinkt.
+        </p>
+        <textarea id="plak-tekst" rows="6" placeholder="Amsterdam&#10;Rotterdam&#10;IJsselmeer&#10;..."></textarea>
+        <div class="knoppen">
+          <button class="knop primair" id="btn-plak-toepassen">Aanvinken</button>
+          <button class="knop" id="btn-plak-sluiten">Sluiten</button>
+        </div>
+        <div id="plak-uitslag" class="feedback"></div>
+      </div>
+    </div>
+    <div id="keuzelijst" class="keuzelijst"></div>
+  </section>
+</main>
+
+<footer class="voet">
+  <span id="bron-tekst"></span>
+  Provinciegrenzen: CBS via cartomap.github.io.
+</footer>
+
+<script src="data/kaart.js"></script>
+<script src="data/items.js"></script>
+<script src="data/extra.js"></script>
+<script src="data/lijst.js"></script>
+<script src="js/kaart.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

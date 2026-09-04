@@ -1,0 +1,416 @@
+:root {
+  --zee: #cfe4f3;
+  --land: #f3ead8;
+  --landrand: #b9a98c;
+  --rivier: #62a8e0;
+  --tekst: #23272b;
+  --zacht: #6a717a;
+  --lijn: #dcdfe4;
+  --vlak: #ffffff;
+  --achtergrond: #eef1f4;
+  --primair: #1f6feb;
+  --goed: #1a8f4c;
+  --fout: #d3392a;
+  --kijk: #b3651c;
+}
+
+* { box-sizing: border-box; }
+
+/* Eigen display-regels (flex, grid) winnen van het hidden-attribuut, waardoor
+   verborgen onderdelen alsnog zichtbaar bleven - zoals de toetsteller bij
+   Aanwijzen. Dit zet dat recht. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--tekst);
+  background: var(--achtergrond);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ---- kop ---- */
+
+.balk {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 18px;
+  background: var(--vlak);
+  border-bottom: 1px solid var(--lijn);
+}
+
+.balk h1 {
+  margin: 0;
+  font-size: 19px;
+  letter-spacing: -0.2px;
+}
+
+.tabs { display: flex; gap: 4px; }
+
+.tab {
+  border: 1px solid transparent;
+  background: none;
+  font: inherit;
+  font-size: 15px;
+  color: var(--zacht);
+  padding: 6px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.tab:hover { background: var(--achtergrond); color: var(--tekst); }
+
+.tab.actief {
+  background: var(--primair);
+  border-color: var(--primair);
+  color: #fff;
+  font-weight: 600;
+}
+
+.balk-rechts { margin-left: auto; }
+.teller { color: var(--zacht); font-size: 14px; }
+
+main { flex: 1; padding: 16px; min-height: 0; }
+
+/* ---- kaart naast paneel ---- */
+
+.kaart-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 16px;
+  height: calc(100vh - 130px);
+}
+
+.kaart-vak {
+  position: relative;
+  /* zeekleur, zodat de randen naast de kaart niet wit oplichten */
+  background: var(--zee);
+  border: 1px solid var(--lijn);
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: 0;
+}
+
+#kaart {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+}
+
+.kaart-melding {
+  position: absolute;
+  inset: 50% 24px auto 24px;
+  transform: translateY(-50%);
+  max-height: 80%;
+  overflow: auto;
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid var(--lijn);
+  border-radius: 10px;
+  padding: 18px 22px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.14);
+}
+
+.kaart-melding h2 { margin: 0 0 8px; font-size: 20px; }
+.kaart-melding ul { margin: 6px 0 12px; padding-left: 22px; columns: 2; }
+
+/* ---- zijpaneel ---- */
+
+.paneel {
+  background: var(--vlak);
+  border: 1px solid var(--lijn);
+  border-radius: 10px;
+  padding: 16px;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.paneel h2 { margin: 0 0 4px; font-size: 17px; }
+.uitleg { margin: 0 0 12px; color: var(--zacht); font-size: 14px; }
+
+.schakel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.zoek { margin-bottom: 10px; }
+
+.zoek input, textarea {
+  width: 100%;
+  font: inherit;
+  padding: 7px 10px;
+  border: 1px solid var(--lijn);
+  border-radius: 7px;
+}
+
+.zoek input:focus, textarea:focus {
+  outline: 2px solid var(--primair);
+  outline-offset: -1px;
+}
+
+/* ---- opdracht ---- */
+
+.opdracht {
+  background: var(--achtergrond);
+  border-radius: 9px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+
+.opdracht-cat {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--zacht);
+}
+
+.opdracht-naam { font-size: 25px; line-height: 1.15; }
+
+.feedback { font-size: 14px; min-height: 1.2em; margin-bottom: 10px; }
+.feedback.goed { color: var(--goed); font-weight: 600; }
+.feedback.fout { color: var(--fout); }
+.feedback.kijk { color: var(--kijk); }
+.feedback .let-op { margin: 6px 0 0; }
+
+/* ---- knoppen ---- */
+
+.knoppen { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+
+.knop {
+  font: inherit;
+  font-size: 15px;
+  padding: 8px 14px;
+  border: 1px solid var(--lijn);
+  background: var(--vlak);
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.knop:hover { border-color: var(--zacht); }
+
+.knop.primair {
+  background: var(--primair);
+  border-color: var(--primair);
+  color: #fff;
+  font-weight: 600;
+}
+
+.knop.primair:hover { filter: brightness(1.08); }
+.knop.klein, .knop.mini { font-size: 13px; padding: 5px 10px; }
+.knop.mini { margin-left: 8px; font-weight: 400; }
+.knop.gevaar { color: var(--fout); }
+
+.keuzes { display: grid; gap: 8px; margin-bottom: 12px; }
+.keuze { text-align: left; }
+.keuze.goed { border-color: var(--goed); background: #e8f6ed; font-weight: 600; }
+.keuze.fout { border-color: var(--fout); background: #fdecea; }
+
+/* ---- score ---- */
+
+.score-blok {
+  border-top: 1px solid var(--lijn);
+  padding-top: 10px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.score-regel { display: flex; justify-content: space-between; padding: 2px 0; }
+.score-regel span { color: var(--zacht); }
+
+/* ---- leerlijst ---- */
+
+.leerlijst h3 {
+  margin: 14px 0 6px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--zacht);
+}
+
+.leerlijst ul { list-style: none; margin: 0; padding: 0; }
+
+.lijst-knop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  font-size: 15px;
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+
+.lijst-knop:hover { background: var(--achtergrond); }
+
+.lijst-knop.actief {
+  background: var(--primair);
+  color: #fff;
+  font-weight: 600;
+}
+
+.badge {
+  font-size: 12px;
+  color: var(--zacht);
+  background: var(--achtergrond);
+  border-radius: 10px;
+  padding: 1px 7px;
+}
+
+.lijst-knop.actief .badge { background: rgba(255, 255, 255, 0.25); color: #fff; }
+
+/* ---- mijn lijst ---- */
+
+.lijst-layout {
+  background: var(--vlak);
+  border: 1px solid var(--lijn);
+  border-radius: 10px;
+  padding: 18px 22px;
+}
+
+.lijst-kop { max-width: 720px; }
+.lijst-kop h2 { margin: 0 0 4px; }
+
+.plak-vak {
+  background: var(--achtergrond);
+  border-radius: 9px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.keuzelijst {
+  columns: 4;
+  column-gap: 22px;
+  margin-top: 8px;
+}
+
+.keuze-groep {
+  break-inside: avoid;
+  margin-bottom: 18px;
+}
+
+.keuze-groep h3 {
+  margin: 0 0 6px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--zacht);
+  border-bottom: 1px solid var(--lijn);
+  padding-bottom: 4px;
+}
+
+.vink {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  padding: 2px 0;
+  cursor: pointer;
+}
+
+.vink input { cursor: pointer; }
+
+/* ---- voet ---- */
+
+.voet {
+  padding: 10px 18px;
+  color: var(--zacht);
+  font-size: 12px;
+  border-top: 1px solid var(--lijn);
+  background: var(--vlak);
+}
+
+/* ---- kaartonderdelen ---- */
+
+.zee { fill: var(--zee); }
+.provincie { fill: var(--land); stroke: var(--landrand); stroke-width: 1.1; }
+.rivier { fill: var(--rivier); stroke: var(--rivier); stroke-width: 1.6; }
+
+.punt-stip {
+  fill: #fff;
+  stroke: #4b5158;
+  stroke-width: 2;
+}
+
+.punt-provincies .punt-stip, .punt-gebieden .punt-stip { display: none; }
+.punt-water .punt-stip { stroke: #2f6f9e; }
+
+.label {
+  fill: #2c3238;
+  paint-order: stroke;
+  stroke: rgba(255, 255, 255, 0.85);
+  stroke-width: 3.2;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.label-provincies {
+  fill: #6a5b3e;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.label-water { fill: #2b6a99; font-style: italic; }
+.label-gebieden { fill: #6c6155; font-style: italic; }
+
+/* markeringen */
+
+.mark { pointer-events: none; }
+
+.mark-vorm { fill-opacity: 0.35; stroke-width: 2.5; }
+.mark-ring { fill: none; stroke-width: 3.5; }
+
+.mark-goed.mark-vorm { fill: var(--goed); stroke: var(--goed); }
+.mark-goed.mark-ring { stroke: var(--goed); }
+.mark-fout.mark-vorm { fill: var(--fout); stroke: var(--fout); }
+.mark-fout.mark-ring { stroke: var(--fout); }
+.mark-kijk.mark-vorm { fill: var(--kijk); stroke: var(--kijk); }
+.mark-kijk.mark-ring { stroke: var(--kijk); }
+.mark-vraag.mark-vorm { fill: var(--primair); stroke: var(--primair); }
+.mark-vraag.mark-ring { stroke: var(--primair); stroke-dasharray: 6 4; }
+
+.mark-klik line { stroke: var(--fout); stroke-width: 3.5; stroke-linecap: round; }
+
+.mark-label {
+  font-size: 17px;
+  font-weight: 700;
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 4;
+  stroke-linejoin: round;
+}
+
+.mark-label.mark-goed { fill: var(--goed); }
+.mark-label.mark-fout { fill: var(--fout); }
+.mark-label.mark-kijk { fill: var(--kijk); }
+
+/* ---- smallere schermen ---- */
+
+@media (max-width: 1100px) {
+  .keuzelijst { columns: 3; }
+}
+
+@media (max-width: 900px) {
+  .kaart-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .kaart-vak { height: 62vh; }
+  .paneel { max-height: none; }
+  .keuzelijst { columns: 2; }
+  .balk { flex-wrap: wrap; gap: 10px; }
+}
